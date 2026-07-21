@@ -14,7 +14,9 @@ if st.button("AI se Poochein"):
     else:
         try:
             genai.configure(api_key=api_key)
-            model = genai.GenerativeModel("gemini-1.5-flash")
+            
+            # Sub-model fallback test
+            model = genai.GenerativeModel('gemini-1.5-flash-latest')
             response = model.generate_content(user_question)
 
             st.success("Jawab:")
