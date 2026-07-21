@@ -1,5 +1,5 @@
 import streamlit as st
-from google import genai
+import google.generativeai as genai
 
 st.title("🤖 Mera Personal AI Assistant")
 
@@ -10,14 +10,13 @@ if st.button("AI se Poochein"):
     if not api_key:
         st.error("Pehle API key dalein!")
     elif not user_question:
-        st.warning("Kuch sawal toh likhein.")
+        st.warning("Kuch sawal toh likhein!")
     else:
         try:
-            client = genai.Client(api_key=api_key)
-            response = client.models.generate_content(
-                model='gemini-1.5-flash',
-                contents=user_question
-            )
+            genai.configure(api_key=api_key)
+            model = genai.GenerativeModel('gemini-1.5-flash')
+            response = model.generate_content(user_question)
+            
             st.success("Jawab:")
             st.write(response.text)
         except Exception as e:
