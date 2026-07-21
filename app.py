@@ -13,10 +13,7 @@ if st.button("AI se Poochein"):
         st.warning("Kuch sawal toh likhein!")
     else:
         try:
-            # API Key Setup
             genai.configure(api_key=api_key)
-            
-            # Stable Model
             model = genai.GenerativeModel("gemini-1.5-flash")
             response = model.generate_content(user_question)
 
