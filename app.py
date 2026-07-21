@@ -1,5 +1,5 @@
 import streamlit as st
-import google.generativeai as genai
+from google import genai
 
 st.title("🤖 Mera Personal AI Assistant")
 
@@ -13,9 +13,11 @@ if st.button("AI se Poochein"):
         st.warning("Kuch sawal toh likhein!")
     else:
         try:
-            genai.configure(api_key=api_key)
-            model = genai.GenerativeModel('gemini-1.5-flash')
-            response = model.generate_content(user_question)
+            client = genai.Client(api_key=api_key)
+            response = client.models.generate_content(
+                model="gemini-2.5-flash",
+                contents=user_question,
+            )
             
             st.success("Jawab:")
             st.write(response.text)
