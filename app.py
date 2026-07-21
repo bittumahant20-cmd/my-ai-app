@@ -14,11 +14,13 @@ if st.button("AI se Poochein"):
     else:
         try:
             client = genai.Client(api_key=api_key)
+            
+            # Yahan 'models/' lagana zaruri hai new SDK me:
             response = client.models.generate_content(
-                model="gemini-1.5-flash",
+                model="models/gemini-1.5-flash",
                 contents=user_question,
             )
-            
+
             st.success("Jawab:")
             st.write(response.text)
         except Exception as e:
