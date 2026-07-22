@@ -19,7 +19,7 @@ if st.button("AI se Poochein"):
         try:
             genai.configure(api_key=api_key)
             # Sabse stable aur chalne wala model
-            model = genai.GenerativeModel('gemini-1.5-flash')
+            model = genai.GenerativeModel('gemini-1.5-pro')
             
             with st.spinner("Jawab ban raha hai..."):
                 response = model.generate_content(user_question)
