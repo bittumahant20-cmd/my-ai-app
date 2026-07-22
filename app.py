@@ -5,9 +5,7 @@ st.set_page_config(page_title="Mera Personal AI Assistant", page_icon="🤖")
 
 st.title("🤖 AI Assistant")
 
-# API Key input
 api_key = st.text_input("Apni Gemini API Key yahan dalein:", type="password")
-
 user_question = st.text_area("Apna sawal likhein:")
 
 if st.button("AI se Poochein"):
@@ -18,8 +16,8 @@ if st.button("AI se Poochein"):
     else:
         try:
             genai.configure(api_key=api_key)
-            # Sabse stable aur chalne wala model
-            model = genai.GenerativeModel('gemini-1.5-pro')
+            # Yahan hum sabse standard aur guaranteed chalne wala model set kar rahe hain
+            model = genai.GenerativeModel('gemini-1.5-flash')
             
             with st.spinner("Jawab ban raha hai..."):
                 response = model.generate_content(user_question)
