@@ -1,11 +1,13 @@
 import streamlit as st
-from google import genai
+import google.generativeai as genai
 
 st.set_page_config(page_title="Mera Personal AI Assistant", page_icon="🤖")
 
-st.title("🤖 Mera Personal AI Assistant")
+st.title("🤖 AI Assistant")
 
+# API Key input
 api_key = st.text_input("Apni Gemini API Key yahan dalein:", type="password")
+
 user_question = st.text_area("Apna sawal likhein:")
 
 if st.button("AI se Poochein"):
@@ -15,13 +17,15 @@ if st.button("AI se Poochein"):
         st.error("Pehle apna sawal toh likhein!")
     else:
         try:
-            client = genai.Client(api_key=api_key)
+            genai.configure(api_key=api_key)
+            # Sabse stable aur chalne wala model
+            model = genai.GenerativeModel('gemini-1.5-flash')
+            
             with st.spinner("Jawab ban raha hai..."):
-                response = client.models.generate_content(
-                    model='gemini-2.5-flash',
-                    contents=user_question,
-                )
+                response = model.generate_content(user_question)
+                
             st.success("Jawab:")
             st.write(response.text)
+            
         except Exception as e:
             st.error(f"Error aa gaya: {e}")
